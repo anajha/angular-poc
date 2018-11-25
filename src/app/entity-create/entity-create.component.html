@@ -1,0 +1,31 @@
+<form [formGroup]="myForm">
+
+  Value: {{ myForm.value | json }}
+
+  <hr>
+
+  <mat-form-field class="full">
+      <input matInput placeholder="Entity Name" formControlName="entityname">
+  </mat-form-field>
+
+  <div formArrayName="attributes">
+
+      <div *ngFor="let attribute of attributeForms.controls; let i=index" [formGroupName]="i">
+
+          <mat-form-field class="xs">
+              <input matInput placeholder="Column Name" formControlName="columnname">
+          </mat-form-field>
+          <mat-form-field class="xs">
+              <input matInput placeholder="Datatype" formControlName="datatype">
+          </mat-form-field>
+          <button mat-raised-button color="warn" (click)="deleteAttribute()">Delete</button>
+
+      </div>
+
+  </div>
+
+  <button mat-raised-button color="primary" (click)="addAttributes()">Add Attributes</button>
+
+  <button *ngIf="columnpresent" mat-raised-button color="primary" (click)="createEntity()">Create Entity</button>
+
+</form>
