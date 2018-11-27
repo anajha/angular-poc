@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { EntityCreateComponent } from './modules/entity-create/entity-create.component';
+import { EntityCreateComponent } from './entity-create/entity-create.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { EntityCreateComponent } from './modules/entity-create/entity-create.com
     EntityCreateComponent   
   ],
   imports: [
+    HttpModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
