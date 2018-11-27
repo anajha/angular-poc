@@ -36,7 +36,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { EntityCreateComponent } from './entity-create/entity-create.component';
+import { EntityCreateComponent } from './modules/entity-create/entity-create.component';
 
 @NgModule({
   declarations: [
