@@ -69,6 +69,7 @@ export class EntityCreateComponent implements OnInit {
     this.backEndOperations.createEntity(this.create)
     .subscribe((message:string)=>{
       console.log(message);
+      this.alerts.setDefaults('timeout',10);
       this.alerts.setMessage(message,'success');
     })
     }
