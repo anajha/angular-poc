@@ -26,16 +26,4 @@ export class BackendOperationsService {
     return this.http.post(this.userUrl+"/create", create);
   }
 
-  public mapToObj(map)
-  {
-    console.log(map);
-    let obj=Object.create(null);
-    for(let[k,v] of map.entries())
-    {
-      console.log("Key is:-"+k+" Value is:-"+v);
-      obj[k]=v;
-    }
-    console.log(obj);
-    return obj;
-  }
 }

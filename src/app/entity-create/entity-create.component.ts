@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { BackendOperationsService } from '../backend-operations.service';
+import { AlertsService } from 'angular-alert-module';
 import { Router } from '@angular/router';
 import { Create } from '../models/create.model';
 
@@ -18,7 +19,7 @@ export class EntityCreateComponent implements OnInit {
   columns:object;
 
   
-  constructor(private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
+  constructor(private alerts: AlertsService,private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
     this.myForm = this.fb.group({
       entityname: '',
       attributes: this.fb.array([])
@@ -59,13 +60,16 @@ export class EntityCreateComponent implements OnInit {
         console.log("Column value:-"+attribute.datatype);
         this.columnMap.set(attribute.columnname,attribute.datatype);
     }
-    this.columns=new Object();
-    this.columns=this.backEndOperations.mapToObj(this.columnMap);
-    console.log(this.columns);
-    this.create.setColumns(this.columns);
+    const convMap={};
+    this.columnMap.forEach((val:string,key:string)=>{
+      convMap[key]=val;
+    })
+    console.log(convMap);
+    this.create.setColumns(convMap);
     this.backEndOperations.createEntity(this.create)
     .subscribe((message:string)=>{
-      console.log(message)
+      console.log(message);
+      this.alerts.setMessage(message,'success');
     })
     }
   }

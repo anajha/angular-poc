@@ -1,6 +1,6 @@
 export class Create {
     tbname: string;
-    columns: object;
+    columns: any;
 
     setTbName(tbname:string)
     {
@@ -12,7 +12,7 @@ export class Create {
         return this.tbname;
     }
 
-    setColumns(columns:object)
+    setColumns(columns:any)
     {
         this.columns=columns;
     }

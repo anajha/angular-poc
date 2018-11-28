@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertsModule } from 'angular-alert-module';
 
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -49,6 +50,7 @@ import { EntityCreateComponent } from './entity-create/entity-create.component';
   imports: [
     HttpModule,
     HttpClientModule,
+    AlertsModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
