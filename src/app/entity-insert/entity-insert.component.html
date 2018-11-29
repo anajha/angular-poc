@@ -1,0 +1,32 @@
+<form [formGroup]="entityInsertForm">
+
+  Value: {{ entityInsertForm.value | json }}
+  <hr>
+  <mat-form-field>
+    <mat-select placeholder="Entity Name" formControlName="entityname">
+      <mat-option *ngFor="let entity of entities" [value]="entity.value" (onSelectionChange)="getTableStructure($event,entity.value)">
+        {{entity.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p> Selected Entity: {{entityInsertForm.value.entityname}} </p>
+  <p></p>
+  <mat-card class="example-card" *ngIf="selected">
+    <mat-card-header>
+      <mat-card-title>Enter Records</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div formArrayName="attributes">
+        <div *ngFor="let entity of entityStructure.controls; let i=index" [formGroupName]="i">
+          <div class="label-margin">
+            <label >{{entity.Field|uppercase}}</label>
+          </div>
+          <mat-form-field class="xs">
+            <input matInput placeholder="{{entity.Type|uppercase}}">
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-raised-button color="warn" (click)="saveEntity()">Save</button>
+    </mat-card-content>
+  </mat-card>
+</form>

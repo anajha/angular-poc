@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsModule } from 'angular-alert-module';
+import { FormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -40,16 +41,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { EntityCreateComponent } from './entity-create/entity-create.component';
+import { EntityInsertComponent } from './entity-insert/entity-insert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    EntityCreateComponent   
+    EntityCreateComponent,
+    EntityInsertComponent   
   ],
   imports: [
     HttpModule,
     HttpClientModule,
+    FormsModule,
     AlertsModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,

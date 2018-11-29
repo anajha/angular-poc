@@ -13,17 +13,19 @@ export class BackendOperationsService {
 
   private userUrl = 'http://localhost:8080';
 
-  public getUsers() {
-    return this.http.get(this.userUrl);
-  }
-
-  public deleteUser(user) {
-    return this.http.delete(this.userUrl + "/"+ user.id);
-  }
-
   public createEntity(create) {
-    console.log(create);
     return this.http.post(this.userUrl+"/create", create);
+  }
+
+  public getEntityStructure(tableName)
+  {
+    return this.http.get(this.userUrl+"/viewSchema/"+tableName)
+  }
+  public getEntityList(){
+    return this.http.get(this.userUrl+"/listAllTables")
+  }
+  public insertData(insert) {
+    return this.http.post(this.userUrl+"/insertData", insert);
   }
 
 }

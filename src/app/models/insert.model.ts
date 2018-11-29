@@ -1,6 +1,6 @@
-export class Create {
+export class Insert {
     tbname: string;
-    columns: object;
+    data: object;
 
     setTbName(tbname:string)
     {
@@ -12,13 +12,13 @@ export class Create {
         return this.tbname;
     }
 
-    setColumns(columns:object)
+    setData(data:object)
     {
-        this.columns=columns;
+        this.data=data;
     }
 
-    getColumns()
+    getData()
     {
-        return this.columns;
+        return this.data;
     }
   }

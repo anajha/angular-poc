@@ -12,15 +12,13 @@ import { Create } from '../models/create.model';
 })
 export class EntityCreateComponent implements OnInit {
 
-  myForm: FormGroup;
+  entityCreateForm: FormGroup;
   columnpresent: boolean;
   create:Create=new Create();
   columnMap:Map<string,string>;
-  columns:object;
 
-  
   constructor(private alerts: AlertsService,private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
-    this.myForm = this.fb.group({
+    this.entityCreateForm = this.fb.group({
       entityname: '',
       attributes: this.fb.array([])
     })
@@ -31,7 +29,7 @@ export class EntityCreateComponent implements OnInit {
   }
 
   get attributeForms() {
-    return this.myForm.get('attributes') as FormArray
+    return this.entityCreateForm.get('attributes') as FormArray
   }
 
   addAttributes() {
@@ -51,25 +49,20 @@ export class EntityCreateComponent implements OnInit {
 
   createEntity():void{
     this.columnMap=new Map();
-    console.log("Entity Name:-"+this.myForm.value.entityname);
-    this.create.setTbName(this.myForm.value.entityname);
+    this.create.setTbName(this.entityCreateForm.value.entityname);
 
-    for(let attribute of this.myForm.value.attributes)
+    for(let attribute of this.entityCreateForm.value.attributes)
     {
-        console.log("Column name:-"+attribute.columnname);
-        console.log("Column value:-"+attribute.datatype);
         this.columnMap.set(attribute.columnname,attribute.datatype);
     }
     const convMap={};
     this.columnMap.forEach((val:string,key:string)=>{
       convMap[key]=val;
     })
-    console.log(convMap);
     this.create.setColumns(convMap);
     this.backEndOperations.createEntity(this.create)
     .subscribe((message:string)=>{
-      console.log(message);
-      this.alerts.setDefaults('timeout',10);
+      this.alerts.setDefaults('timeout',5);
       this.alerts.setMessage(message,'success');
     })
     }
