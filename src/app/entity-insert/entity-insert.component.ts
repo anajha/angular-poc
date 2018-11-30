@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, FormArray } from '@angular/forms';
 import { BackendOperationsService } from '../backend-operations.service';
 import { AlertsService } from 'angular-alert-module';
 import { Router } from '@angular/router';
@@ -21,8 +21,7 @@ export class EntityInsertComponent implements OnInit {
   
   constructor(private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
     this.entityInsertForm = this.fb.group({
-      entityname: '',
-      attributes: this.fb.array([])
+      entityname: ''
     })
    }
 
@@ -51,6 +50,11 @@ export class EntityInsertComponent implements OnInit {
     .subscribe((entityStructure:EntityStructure[])=>{
       this.entityStructure=entityStructure;
     })
+  }
+
+  saveEntity()
+  {
+    
   }
 
 }
