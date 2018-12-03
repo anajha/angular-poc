@@ -11,8 +11,8 @@ const httpOptions = {
 export class BackendOperationsService {
   constructor(private http:HttpClient) {}
 
-  private userUrl = 'http://localhost:8080';
-
+  private userUrl = 'http://localhost:8080/';
+ 
   public createEntity(create) {
     return this.http.post(this.userUrl+"/create", create);
   }
@@ -24,8 +24,12 @@ export class BackendOperationsService {
   public getEntityList(){
     return this.http.get(this.userUrl+"/listAllTables")
   }
-  public insertData(insert) {
-    return this.http.post(this.userUrl+"/insertData", insert);
+  public saveEntityData(insert)
+  {
+    return this.http.post(this.userUrl+"/insertData/",insert);
   }
-
+  public viewEntityData(tableName)
+  {
+    return this.http.get(this.userUrl+"/viewData/"+tableName)
+  }
 }

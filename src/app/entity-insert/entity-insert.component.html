@@ -1,7 +1,4 @@
 <form [formGroup]="entityInsertForm">
-
-  Value: {{ entityInsertForm.value | json }}
-  <hr>
   <mat-form-field>
     <mat-select placeholder="Entity Name" formControlName="entityname">
       <mat-option *ngFor="let entity of entities" [value]="entity.value" (onSelectionChange)="getTableStructure($event,entity.value)">
@@ -9,22 +6,22 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p> Selected Entity: {{entityInsertForm.value.entityname}} </p>
   <p></p>
   <mat-card class="example-card" *ngIf="selected">
     <mat-card-header>
       <mat-card-title>Enter Records</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-          <div *ngFor="let entity of entityStructure">
+          <div *ngFor="let entityStruct of entityStructure">
               <div class="label-margin">
-                <label>{{entity.Field|uppercase}}</label>
+                <label>{{entityStruct.Field|uppercase}}</label>
               </div>
               <mat-form-field class="xs">
-                <input matInput placeholder="{{entity.Type|uppercase}}">
+                <input matInput placeholder="{{entityStruct.Type|uppercase}}" (change)=generateMap(entityStruct.Field,entityInsertForm.value.columnValue) formControlName="columnValue">
               </mat-form-field>
           </div>
-      <button mat-raised-button color="warn" (click)="saveEntity()">Save</button>
+      <button mat-raised-button color="warn" (click)="saveEntity(entityInsertForm.value.entityname)">Save</button>
     </mat-card-content>
   </mat-card>
+  <app-alerts></app-alerts>
 </form>

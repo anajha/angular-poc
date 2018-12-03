@@ -1,0 +1,19 @@
+<form [formGroup]="entityViewForm">
+  <mat-form-field>
+    <mat-select placeholder="Entity Name" formControlName="entityname">
+      <mat-option *ngFor="let entity of entities" [value]="entity.value" (onSelectionChange)="getTableData($event,entity.value)">
+        {{entity.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p></p>
+  <table *ngFor="let entityView of entityView; let i=index">
+      <tr>
+          <th *ngFor="let entityDataHeader of entityView.columns; let i=index">{{entityDataHeader|uppercase}}</th>   
+      </tr>
+    <tr *ngFor="let entityData of entityView.rows; let i=index">
+      <td *ngFor="let  entityDataHeader of entityView.columns; let i=index">{{entityData[entityDataHeader]}}</td>
+    </tr>
+</table>
+</form>
+

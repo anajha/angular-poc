@@ -42,13 +42,17 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { EntityCreateComponent } from './entity-create/entity-create.component';
 import { EntityInsertComponent } from './entity-insert/entity-insert.component';
+import { EntityViewComponent } from './entity-view/entity-view.component';
+import { EntityDropComponent } from './entity-drop/entity-drop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     EntityCreateComponent,
-    EntityInsertComponent   
+    EntityInsertComponent,
+    EntityViewComponent,
+    EntityDropComponent   
   ],
   imports: [
     HttpModule,

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, FormArray } from '@angular/forms';
 import { BackendOperationsService } from '../backend-operations.service';
-import { AlertsService } from 'angular-alert-module';
 import { Router } from '@angular/router';
 import { Entity } from '../models/entity.model';
 import { EntityStructure } from '../models/entity-structure.model';
+import { Insert } from '../models/insert.model';
+import { AlertsService } from 'angular-alert-module';
 
 @Component({
   selector: 'app-entity-insert',
@@ -18,10 +19,14 @@ export class EntityInsertComponent implements OnInit {
   entities:Entity[]=[];
   selected:boolean;
   entityStructure:EntityStructure[]=[];
+  entityData=new Map();
+  insert:Insert=new Insert();
   
-  constructor(private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
+  
+  constructor(private alerts: AlertsService,private fb: FormBuilder,private router: Router, private backEndOperations: BackendOperationsService) {
     this.entityInsertForm = this.fb.group({
-      entityname: ''
+      entityname: '',
+      columnValue:''
     })
    }
 
@@ -35,7 +40,6 @@ export class EntityInsertComponent implements OnInit {
         this.entity=new Entity();
         this.entity.setValue(tableName);
         this.entity.setViewValue(tableName);
-        console.log(this.entity);
         this.entities.push(this.entity);
       }) 
     })
@@ -52,9 +56,26 @@ export class EntityInsertComponent implements OnInit {
     })
   }
 
-  saveEntity()
+  saveEntity(entityName)
   {
-    
+    const convMap={};
+    this.entityData.forEach((val:string,key:string)=>{
+      convMap[key]=val;
+    })
+    this.insert.setTbName(entityName);
+    this.insert.setData(convMap);
+    console.log(this.insert);
+    this.backEndOperations.saveEntityData(this.insert)
+    .subscribe((message:string)=>{
+      this.alerts.setDefaults('timeout',5);
+      this.alerts.setMessage(message,'success');
+    })
+    this.entityData=new Map();
+  }
+
+  generateMap(columnName,columnValue){
+    console.log(columnName,columnValue);
+    this.entityData.set(columnName,columnValue);
   }
 
 }
